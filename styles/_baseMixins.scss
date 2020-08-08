@@ -1,0 +1,10 @@
+@mixin flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin setHeightAndWidth($size){
+    height: $size;
+    width: $size;
+}

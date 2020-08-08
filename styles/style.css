@@ -1,0 +1,137 @@
+.intro {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100vh;
+}
+
+.intro h1 {
+  font-size: 3rem;
+}
+
+.intro button {
+  border: none;
+  cursor: pointer;
+  font-size: 4rem;
+  color: #39A3EF;
+  background-color: white;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  margin-top: 5rem;
+  -webkit-transition: color 0.5s, background-color 0.9s;
+  transition: color 0.5s, background-color 0.9s;
+}
+
+.intro button:hover {
+  color: #1B4D70;
+  background-color: #eee;
+}
+
+.playerColors {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  height: 10vh;
+}
+
+.playerColors p {
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.playerTurnTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 10vh;
+  margin-bottom: 2rem;
+}
+
+.playerTurnTitle p {
+  margin: 0 0.5rem;
+  font-size: 2rem;
+}
+
+.board {
+  margin: 0 auto;
+  height: 85vmin;
+  width: 85vmin;
+  background-color: #F2AE76;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.board .field {
+  text-align: center;
+  color: gray;
+  width: 12.5%;
+  height: 12.5%;
+}
+
+.winPage {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.winPage p {
+  font-size: 3rem;
+  margin: 0 2rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+body {
+  background-color: #3DADFC;
+}
+
+.hidden {
+  display: none;
+}
+/*# sourceMappingURL=style.css.map */

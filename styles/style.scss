@@ -1,0 +1,23 @@
+@import "./vars";
+@import "./baseMixins";
+@import "./intro";
+@import "./gameUI";
+@import "./winUi";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+body {
+    background-color: $lighthueColor;
+}
+
+.hidden {
+    // opacity: 0;
+    // pointer-events: none;
+    display: none;
+}

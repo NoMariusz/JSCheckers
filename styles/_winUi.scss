@@ -1,0 +1,8 @@
+.winPage {
+    height: 100vh;
+    @include flexCenter;
+    p {
+        font-size: 3rem;
+        margin: 0 2rem;
+    }
+}
