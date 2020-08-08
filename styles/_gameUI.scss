@@ -21,7 +21,7 @@
 .board {
     // width: 75%;
     margin: 0 auto;
-    @include setHeightAndWidth(85vmin);
+    @include setHeightAndWidth(95vmin);
     background-color: $contrastLightColor;
     margin-bottom: 2rem;
     display: flex;
@@ -29,8 +29,20 @@
     flex-wrap: wrap;
     .field{
         text-align: center;
-        color: gray;
         width: $fieldsize;
         height: $fieldsize;
+        display: flex;
+        @include flexCenter;
+        flex-direction: column;
+        p {
+            color: gray;
+            font-size: 50%;
+        }
+        .pawn{
+            margin: 1%;
+            @include setHeightAndWidth(48%);
+        }
     }
 }
+
+// end on 17:41

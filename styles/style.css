@@ -78,8 +78,8 @@
 
 .board {
   margin: 0 auto;
-  height: 85vmin;
-  width: 85vmin;
+  height: 95vmin;
+  width: 95vmin;
   background-color: #F2AE76;
   margin-bottom: 2rem;
   display: -webkit-box;
@@ -95,9 +95,33 @@
 
 .board .field {
   text-align: center;
-  color: gray;
   width: 12.5%;
   height: 12.5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.board .field p {
+  color: gray;
+  font-size: 50%;
+}
+
+.board .field .pawn {
+  margin: 1%;
+  height: 48%;
+  width: 48%;
 }
 
 .winPage {

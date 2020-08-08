@@ -8,11 +8,13 @@ function startGame(){
         let gameBlock = document.querySelector(".game");
         introBlock.classList.add("hidden");
         gameBlock.classList.remove("hidden");
-        initBoard();
+        prepareBoard();
     }
 
-    function initBoard(){
+    function prepareBoard(){
         board = new Board;
+        board.initFields();
+        board.initPawns();
     }
 
     loadGameUi();
