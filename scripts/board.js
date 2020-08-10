@@ -28,7 +28,7 @@ export class Board{
                 rowNumber --;
                 nextFieldColor = swapFieldColor(nextFieldColor);
             }
-            let tempfield = new Field(nextFieldColor, letters[letterNumber], rowNumber, this);
+            let tempfield = new Field(nextFieldColor, letterNumber, rowNumber, this);
             nextFieldColor = swapFieldColor(nextFieldColor);
 
             this.fields.push(tempfield);
@@ -102,7 +102,17 @@ export class Board{
 
     checkPawnCanMove(pawn, field){
         if (field.canCaptured){
-            return true;
+            let pawnColumn = pawn.field.codeLetterIndex;
+            let pawnRow = pawn.field.codeNumber;
+            let fieldColumn = field.codeLetterIndex;
+            let fieldRow = field.codeNumber;
+            if (Math.abs(pawnColumn - fieldColumn) == 1 && Math.abs(pawnRow - fieldRow) == 1){
+                if (pawn.color == "black" && pawnRow - fieldRow == 1){
+                    return true;
+                }  else if (pawn.color == "white" && pawnRow - fieldRow == -1){
+                    return true;
+                }
+            }
         }
         return false;
     }

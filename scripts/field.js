@@ -1,9 +1,11 @@
+import {letters } from './vars.js';
+
 export class Field{
-    constructor(color, codeLetter, codeNumber, board){
+    constructor(color, codeLetterIndex, codeNumber, board){
         // console.log(`Field: initializing, color ${color}, code ${code}`);
         this.board = board;
         this.color = color;
-        this.codeLetter = codeLetter;
+        this.codeLetterIndex = codeLetterIndex;
         this.codeNumber = codeNumber;
         this.pawn = null;
         this.moveFunction = null;
@@ -12,7 +14,7 @@ export class Field{
     }
 
     get code(){
-        return this.codeLetter + this.codeNumber.toString();
+        return letters[this.codeLetterIndex] + this.codeNumber.toString();
     }
 
     get canCaptured(){
