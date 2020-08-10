@@ -115,13 +115,19 @@
 
 .board .field p {
   color: gray;
-  font-size: 50%;
+  font-size: 70%;
 }
 
 .board .field .pawn {
-  margin: 1%;
-  height: 48%;
-  width: 48%;
+  margin: 3%;
+  padding: 2%;
+  height: 62%;
+  width: 62%;
+}
+
+.board .field .selectedPawn {
+  background-color: #39A3EF;
+  border-radius: 50%;
 }
 
 .winPage {

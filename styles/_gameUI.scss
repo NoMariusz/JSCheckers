@@ -36,13 +36,16 @@
         flex-direction: column;
         p {
             color: gray;
-            font-size: 50%;
+            font-size: 70%;
         }
         .pawn{
-            margin: 1%;
-            @include setHeightAndWidth(48%);
+            margin: 3%;
+            padding: 2%;
+            @include setHeightAndWidth(62%);
+        }
+        .selectedPawn{
+            background-color: $primaryColor;
+            border-radius: 50%;
         }
     }
 }
-
-// end on 17:41
