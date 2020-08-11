@@ -24,10 +24,12 @@ export class Pawn{
     }
 
     selectPawn(){
-        console.log(`Pawn: select pawn startFieldcode ${this.field.code}`);
-        this.field.board.unselectAllPawns();
-        this.setPawnActive();
-        this.field.board.preparePawnMove(this);
+        if (this.color == this.field.board.activeColor){
+            console.log(`Pawn: select pawn startFieldcode ${this.field.code}`);
+            this.field.board.unselectAllPawns();
+            this.setPawnActive();
+            this.field.board.preparePawnMove(this);
+        }
     }
 
     setPawnActive(){

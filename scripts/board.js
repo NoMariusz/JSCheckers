@@ -7,6 +7,7 @@ export class Board{
         this.fields = [];
         this.pawns = [];
         this.documentBlock = document.querySelector(".board");
+        this.activeColor = 'white';
     }
 
     initFields(){
@@ -64,7 +65,7 @@ export class Board{
                     }
                 }
             }
-            console.log(`Initing fields pawn: field ${field}, fieldPawn ${field.pawn}, fieldOccupied: ${field.occupied}`);
+            // console.log(`Initing fields pawn: field ${field}, fieldPawn ${field.pawn}, fieldOccupied: ${field.occupied}`);
         });
     }
 
@@ -81,8 +82,10 @@ export class Board{
     }
 
     makePawnMove(pawn, nField){
+        console.log(`Board: makePawnMove(pawn: ${pawn}, newField:${nField})`);
         pawn.movePawn(nField);
         this.clearFieldsMovePosibility();
+        this.changeActiveColor();
     }
 
     makePawnTakedMove(pawn, nField, takedPawn){
@@ -90,6 +93,7 @@ export class Board{
         pawn.movePawn(nField);
         takedPawn.takeThisPawn();
         this.clearFieldsMovePosibility();
+        this.changeActiveColor();
     }
 
     addFieldsMovePosibility(pawn){
@@ -154,5 +158,16 @@ export class Board{
         return this.fields.find((e) => {
             return e.codeNumber == row && e.codeLetterIndex == column;
         });
+    }
+
+    changeActiveColor(){
+        const colorHavingTurn = document.getElementById('colorHavingTurn');
+        if (this.activeColor === 'white'){
+            this.activeColor = 'black';
+            colorHavingTurn.textContent = 'black';
+        } else {
+            this.activeColor = 'white';
+            colorHavingTurn.textContent = 'white';
+        }
     }
 }
