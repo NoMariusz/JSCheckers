@@ -77,9 +77,9 @@ export class Field{
         this.node.removeEventListener("click", this.moveFunction);
     }
 
-    addTakeMoveFunction(pawn, takedPawn){
+    addTakeMoveFunction(pawn, takedPawns){
         this.moveFunction = () => {
-            this.board.makePawnTakedMove(pawn, this, takedPawn);
+            this.board.makePawnTakedMove(pawn, this, takedPawns);
         };
         this.node.addEventListener("click", this.moveFunction);
     }

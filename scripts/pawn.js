@@ -16,7 +16,7 @@ export class Pawn{
     initNode(){
         this.node = document.createElement("img");
         this.node.classList.add("pawn");
-        this.node.setAttribute("src", `assets/${this.color}Pan.png`);
+        this.node.setAttribute("src", `assets/${this.color}Pawn.png`);
         this.node.addEventListener("click", () => {
             console.log(`${this}, clicked`);
             this.selectPawn();
@@ -52,6 +52,7 @@ export class Pawn{
         newField.addPawn(this);
         this.field = newField;
         this.setPawnUnactive();
+        this.checkCanBeQueen();
     }
 
     takeThisPawn(){
@@ -60,5 +61,17 @@ export class Pawn{
         this.field = null;
         console.log(`${this} deleting self`);
         delete this;
+    }
+
+    checkCanBeQueen(){
+        if ((this.color === 'white' && this.field.codeNumber == 8) || (this.color === 'black' && this.field.codeNumber == 1)){
+            console.log(`Pawn: checkCanBeQueen() - ${this} is now queen`);
+            this.makeQueen();
+        }
+    }
+
+    makeQueen(){
+        this.queen = true;
+        this.node.setAttribute("src", `assets/${this.color}QueenPawn.png`);
     }
 }

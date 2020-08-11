@@ -87,10 +87,12 @@ export class Board{
         this.makeAfterPawnMoveOperations();
     }
 
-    makePawnTakedMove(pawn, nField, takedPawn){
-        console.log(`Board: makePawnTakedMove(pawn: ${pawn}, newField:${nField}, takedPawn:${takedPawn})`);
+    makePawnTakedMove(pawn, nField, takedPawns){
+        console.log(`Board: makePawnTakedMove(pawn: ${pawn}, newField:${nField}, takedPawnS:${takedPawns})`);
         pawn.movePawn(nField);
-        takedPawn.takeThisPawn();
+        takedPawns.forEach(takedPawn => {
+            takedPawn.takeThisPawn();
+        });
         this.makeAfterPawnMoveOperations();
     }
 
@@ -108,12 +110,15 @@ export class Board{
         this.fields.forEach(field => {
             let checking = this.checkPawnCanMove(pawn, field);
             // console.log(`Board: addFieldsMovePossibility: field ${field}, result: ${checking}`);
-            if (checking == 1){
+            if (checking === true){     // make normal, not taked pawn move
                 field.markFieldPossibleToMove();
                 field.addMoveFunction(pawn);
-            } else if (checking instanceof Field){
+            } else if (checking instanceof Field){  // make taking one pawn move
                 field.markFieldPossibleToMove('#F2AE76');
-                field.addTakeMoveFunction(pawn, checking.pawn);
+                field.addTakeMoveFunction(pawn, [checking.pawn]);
+            } else if (checking instanceof Array){     // make taking many pawns move
+                field.markFieldPossibleToMove('#F2AE76');
+                field.addTakeMoveFunction(pawn, checking);
             }
         });
     }
@@ -126,17 +131,40 @@ export class Board{
     }
 
     checkPawnCanMove(pawn, field){
-        // 0 is pawn can not move, 1 is can move, returning field is mean pawn can take other pawn
+        // false is pawn can not move, true is can move, returning field is mean pawn can take other pawn
         let pawnColumn = pawn.field.codeLetterIndex;
         let pawnRow = pawn.field.codeNumber;
         let fieldColumn = field.codeLetterIndex;
         let fieldRow = field.codeNumber;
-        if (Math.abs(pawnColumn - fieldColumn) <= 2 && Math.abs(pawnRow - fieldRow) <= 2){  // check move only for nearest fields
+        if (pawn.queen){      // move for queens
+            if (field.canCaptured){
+                let slantDistance = Math.abs(pawnColumn - fieldColumn)  // slant tiles distance beetween pawn and checking field
+                if (slantDistance === Math.abs(pawnRow - fieldRow)){
+                    let takedPawnsArray = [];
+                    for (var slantDistanceIter = slantDistance - 1; slantDistanceIter > 0; slantDistanceIter --){   // to check every field beetween pawn and checking field
+                        let takedPawnRow = (pawnRow - fieldRow > 0) ? (pawnRow - slantDistanceIter) : (pawnRow + slantDistanceIter);
+                        let takedPawnColumn =  (pawnColumn - fieldColumn > 0) ? (pawnColumn - slantDistanceIter) : (pawnColumn + slantDistanceIter);
+                        let takedPawnField = this.findFieldByCords(takedPawnRow, takedPawnColumn);
+                        if (takedPawnField.occupied){       // check field to take, has pawn
+                            if (takedPawnField.pawn.color == pawn.color){   // pawn can not jump over allies pawns, so an not move
+                                return false;
+                            } else {    // if field has enemy pawn, add them to taked pawn array
+                                takedPawnsArray.push(takedPawnField.pawn);
+                            }
+                        }
+                    }
+                    if (takedPawnsArray.length > 0){    // if is any pawn to took, return array of them
+                        return takedPawnsArray;
+                    }
+                    return true;           // if takedArray is empty, none ally at line beetween field and pawn, return true
+                }
+            }
+        } else if (Math.abs(pawnColumn - fieldColumn) <= 2 && Math.abs(pawnRow - fieldRow) <= 2){  // check move only for nearest fields
             if (field.canCaptured){
                 if (pawn.color == "black" && pawnRow - fieldRow == 1){  // normal move to front
-                    return 1;
+                    return true;
                 }  else if (pawn.color == "white" && pawnRow - fieldRow == -1){     // normal move to front
-                    return 1;
+                    return true;
                 } else {    // taking a pawn
                     if (pawn.color == 'black' && Math.abs(pawnColumn - fieldColumn) == 2 && pawnRow - fieldRow == 2){
                         let takedPawnRow = pawnRow - 1;
@@ -158,7 +186,7 @@ export class Board{
                 }
             }
         }
-        return 0;
+        return false;
     }
 
     findFieldByCords(row, column){
