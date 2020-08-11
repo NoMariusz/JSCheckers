@@ -14,7 +14,7 @@ function startGame(){
     function prepareBoard(){
         board = new Board;
         board.initFields();
-        board.initPawns();
+        board.initPawns();      //after board init pawns, game started, by theirs eventListeners
     }
 
     loadGameUi();

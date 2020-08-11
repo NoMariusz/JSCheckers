@@ -56,6 +56,7 @@ export class Pawn{
 
     takeThisPawn(){
         this.field.removePawn();
+        this.field.board.removePawnFromBoardPawnList(this);
         this.field = null;
         console.log(`${this} deleting self`);
         delete this;
