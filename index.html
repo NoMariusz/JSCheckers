@@ -18,15 +18,18 @@
             <p>turn</p>
         </div>
         <div class="board">
+            <audio id="clickSound" src="./assets/clickSound.wav" preload="auto" controls="none"></audio>
+            <audio id="errorSound" src="./assets/errorSound.wav" preload="auto" controls="none"></audio>
         </div>
     </div>
 
     <div class="winPage hidden">
+        <audio id="sunnyFanfarSound" src="./assets/sunnyFanfar.wav" preload="auto" controls="none"></audio>
         <div class="winInfo">
             <p id="winColorName">Color</p>
             <p>Win !!!</p>
         </div>
-        <button onclick="window.location.reload();">One more time</button>
+        <button id="reloadButton">One more time</button>
     </div>
     
     <script type="module" src="./scripts/app.js"></script>

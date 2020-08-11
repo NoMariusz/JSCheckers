@@ -18,9 +18,23 @@ function startGame(){
     }
 
     loadGameUi();
+    playClickSound();
+}
+
+function playClickSound(){
+    let clickSound = document.getElementById('clickSound');
+    clickSound.play();
 }
 
 window.addEventListener("load", () => {
-    let startBtn = document.querySelector(".startButton");
-    startBtn.addEventListener("click", () => {startGame()});
+    let startBtn = document.querySelector(".startButton");  // add start game event
+    startBtn.addEventListener("click", startGame);
+
+    const reloadButton = document.getElementById('reloadButton');   // add reload event
+    reloadButton.addEventListener("click", () => {
+        playClickSound();
+        window.setTimeout(() => {
+            window.location.reload();
+        }, 250);
+    });
 });

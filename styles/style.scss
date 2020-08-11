@@ -14,6 +14,9 @@
 
 body {
     background-color: $lightHueColor;
+    audio {
+        display: none;
+    }
 }
 
 .hidden {

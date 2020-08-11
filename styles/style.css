@@ -219,6 +219,10 @@ body {
   background-color: #3DADFC;
 }
 
+body audio {
+  display: none;
+}
+
 .hidden {
   display: none;
 }

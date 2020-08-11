@@ -244,5 +244,7 @@ export class Board{
         winColorName.textContent = color.toUpperCase();
         gameBlock.classList.add("hidden");
         winBlock.classList.remove("hidden");
+        let sunnyFanfarSound = document.getElementById('sunnyFanfarSound');
+        sunnyFanfarSound.play();
     }
 }

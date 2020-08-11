@@ -30,13 +30,14 @@ export class Pawn{
             this.setPawnActive();
             this.field.board.preparePawnMove(this);
         } else {
-            this.playWrongPawnAnimation();
+            this.whenCanNotSelect();
         }
     }
 
     setPawnActive(){
         this.active = true;
         this.node.classList.add("selectedPawn");
+        this.playClickSound();
     }
 
     setPawnUnactive(){
@@ -49,6 +50,7 @@ export class Pawn{
     }
 
     movePawn(newField){
+        this.playClickSound();
         console.log(`Pawn: move pawn from ${this.field.code} to ${newField.code}`);
         this.field.removePawn();
         newField.addPawn(this);
@@ -58,14 +60,14 @@ export class Pawn{
     }
 
     takeThisPawn(){
-        this.node.style.animation = 'pawnTaked 0.5s ease';
+        this.node.style.animation = 'pawnTaked 0.1s ease';
         this.field.board.removePawnFromBoardPawnList(this); //outside timeout, because, after this function is made checking win with this.field.board array
         window.setTimeout(() => {
             this.field.removePawn();
             this.field = null;
             console.log(`${this} deleting self`);
             delete this;
-        }, 500);
+        }, 90);
     }
 
     checkCanBeQueen(){
@@ -80,10 +82,17 @@ export class Pawn{
         this.node.setAttribute("src", `assets/${this.color}QueenPawn.png`);
     }
 
-    playWrongPawnAnimation(){
+    whenCanNotSelect(){
+        let errorSound = document.getElementById('errorSound');
+        errorSound.play();
         this.node.style.animation = 'wrongPawnSelected 1s ease';
         window.setTimeout(() => {
             this.node.style.animation = '';
         }, 1000);
+    }
+
+    playClickSound(){
+        let clickSound = document.getElementById('clickSound');
+        clickSound.play();
     }
 }
