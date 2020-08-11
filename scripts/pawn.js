@@ -51,4 +51,11 @@ export class Pawn{
         this.field = newField;
         this.setPawnUnactive();
     }
+
+    takeThisPawn(){
+        this.field.removePawn();
+        this.field = null;
+        console.log(`${this} deleting self`);
+        delete this;
+    }
 }

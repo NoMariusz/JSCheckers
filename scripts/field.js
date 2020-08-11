@@ -21,6 +21,10 @@ export class Field{
         return this.color == "black" && this.pawn == null;
     }
 
+    get occupied(){
+        return this.pawn != null;
+    }
+
     get isCaptured(){
         return this.pawn != null;
     }
@@ -54,8 +58,8 @@ export class Field{
         this.pawn = null;
     }
 
-    markFieldPossibleToMove(){
-        this.node.querySelector("p").style.color ="#BD4D1A";
+    markFieldPossibleToMove(color="#BD4D1A"){
+        this.node.querySelector("p").style.color = color;
     }
 
     unmarkFieldPossibleToMove(){
@@ -71,6 +75,13 @@ export class Field{
 
     removeMovefunction(){
         this.node.removeEventListener("click", this.moveFunction);
+    }
+
+    addTakeMoveFunction(pawn, takedPawn){
+        this.moveFunction = () => {
+            this.board.makePawnTakedMove(pawn, this, takedPawn);
+        };
+        this.node.addEventListener("click", this.moveFunction);
     }
 
 }

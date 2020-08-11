@@ -64,6 +64,7 @@ export class Board{
                     }
                 }
             }
+            console.log(`Initing fields pawn: field ${field}, fieldPawn ${field.pawn}, fieldOccupied: ${field.occupied}`);
         });
     }
 
@@ -84,11 +85,23 @@ export class Board{
         this.clearFieldsMovePosibility();
     }
 
+    makePawnTakedMove(pawn, nField, takedPawn){
+        console.log(`Board: makePawnTakedMove(pawn: ${pawn}, newField:${nField}, takedPawn:${takedPawn})`);
+        pawn.movePawn(nField);
+        takedPawn.takeThisPawn();
+        this.clearFieldsMovePosibility();
+    }
+
     addFieldsMovePosibility(pawn){
         this.fields.forEach(field => {
-            if (this.checkPawnCanMove(pawn, field)){
+            let checking = this.checkPawnCanMove(pawn, field);
+            // console.log(`Board: addFieldsMovePossibility: field ${field}, result: ${checking}`);
+            if (checking == 1){
                 field.markFieldPossibleToMove();
                 field.addMoveFunction(pawn);
+            } else if (checking instanceof Field){
+                field.markFieldPossibleToMove('#F2AE76');
+                field.addTakeMoveFunction(pawn, checking.pawn);
             }
         });
     }
@@ -101,19 +114,45 @@ export class Board{
     }
 
     checkPawnCanMove(pawn, field){
-        if (field.canCaptured){
-            let pawnColumn = pawn.field.codeLetterIndex;
-            let pawnRow = pawn.field.codeNumber;
-            let fieldColumn = field.codeLetterIndex;
-            let fieldRow = field.codeNumber;
-            if (Math.abs(pawnColumn - fieldColumn) == 1 && Math.abs(pawnRow - fieldRow) == 1){
-                if (pawn.color == "black" && pawnRow - fieldRow == 1){
-                    return true;
-                }  else if (pawn.color == "white" && pawnRow - fieldRow == -1){
-                    return true;
+        // 0 is pawn can not move, 1 is can move, returning field is mean pawn can take other pawn
+        let pawnColumn = pawn.field.codeLetterIndex;
+        let pawnRow = pawn.field.codeNumber;
+        let fieldColumn = field.codeLetterIndex;
+        let fieldRow = field.codeNumber;
+        if (Math.abs(pawnColumn - fieldColumn) <= 2 && Math.abs(pawnRow - fieldRow) <= 2){
+            if (field.canCaptured){
+                if (pawn.color == "black" && pawnRow - fieldRow == 1){  // normal move to front
+                    return 1;
+                }  else if (pawn.color == "white" && pawnRow - fieldRow == -1){     // normal move to front
+                    return 1;
+                } else {    // taking a pawn
+                    if (pawn.color == 'black' && Math.abs(pawnColumn - fieldColumn) == 2 && pawnRow - fieldRow == 2){
+                        let takedPawnRow = pawnRow - 1;
+                        let takedPawnColumn = (pawnColumn - fieldColumn < 0) ? (pawnColumn + 1) : (pawnColumn - 1);
+                        let takedPawnField = this.findFieldByCords(takedPawnRow, takedPawnColumn);
+                        if (takedPawnField.occupied && takedPawnField.pawn.color != 'black'){
+                            // console.log(`Board: find field to take field: ${field},takedPawnField: ${takedPawnField}, takedPawnField.pawn: ${takedPawnField.pawn}`);
+                            return takedPawnField;
+                        }
+                    } else if (pawn.color == 'white' && Math.abs(pawnColumn - fieldColumn) == 2 && pawnRow - fieldRow == -2){
+                        let takedPawnRow = pawnRow + 1;
+                        let takedPawnColumn =  (pawnColumn - fieldColumn < 0) ? (pawnColumn + 1) : (pawnColumn - 1);
+                        let takedPawnField = this.findFieldByCords(takedPawnRow, takedPawnColumn);
+                        if (takedPawnField.occupied && takedPawnField.pawn.color != 'white'){
+                            // console.log(`Board: find field to take field: ${field},takedPawnField: ${takedPawnField}, takedPawnField.pawn: ${takedPawnField.pawn}`);
+                            return takedPawnField;
+                        }
+                    }
                 }
             }
         }
-        return false;
+        return 0;
+    }
+
+    findFieldByCords(row, column){
+        // console.log(`Board: findFieldByCords(row: ${row}, column: ${column})`);
+        return this.fields.find((e) => {
+            return e.codeNumber == row && e.codeLetterIndex == column;
+        });
     }
 }
