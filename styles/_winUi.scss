@@ -1,8 +1,15 @@
 .winPage {
     height: 100vh;
     @include flexCenter;
-    p {
-        font-size: 3rem;
-        margin: 0 2rem;
+    flex-direction: column;
+    .winInfo{
+        @include flexCenter;
+        p {
+            font-size: 5rem;
+            margin: 0 2rem;
+        }
+    }
+    button {
+        @include baseButtonFormat;
     }
 }

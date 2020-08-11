@@ -39,7 +39,7 @@ export class Board{
 
     initPawns(){
         console.log("Board: initPawns()");
-        var remainingBlackPawns = 1;
+        var remainingBlackPawns = 8;
         var canStartAddingWhite = false;
         var color = "black"
         this.fields.forEach(field => {;
@@ -55,7 +55,7 @@ export class Board{
                         color = "white";
                     }
                 } else {
-                    if (field.code === "A5"){
+                    if (field.code === "B2"){
                         canStartAddingWhite = true;
                     }
                     if (canStartAddingWhite){
@@ -100,7 +100,7 @@ export class Board{
         let checkWinResult = this.checkPlayerWin();
         console.log(`Board: makeAfterPawnMoveOperations() - checkingWinResult: ${checkWinResult}`);
         if (checkWinResult === 'white' || checkWinResult === 'black'){
-            window.setTimeout(() => {this.prepareColorWin(checkWinResult)}, 1500);
+            window.setTimeout(() => {this.prepareColorWin(checkWinResult)}, 1000);
         }
     }
 
