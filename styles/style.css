@@ -37,26 +37,6 @@
   background-color: #eee;
 }
 
-.playerColors {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  height: 10vh;
-}
-
-.playerColors p {
-  font-size: 1.5rem;
-  padding: 1rem;
-}
-
 .playerTurnTitle {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -68,7 +48,7 @@
       -ms-flex-pack: center;
           justify-content: center;
   height: 10vh;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .playerTurnTitle p {
@@ -123,11 +103,55 @@
   padding: 2%;
   height: 62%;
   width: 62%;
+  border-radius: 50%;
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .board .field .selectedPawn {
   background-color: #39A3EF;
-  border-radius: 50%;
+}
+
+@-webkit-keyframes wrongPawnSelected {
+  0% {
+    background-color: none;
+  }
+  30% {
+    background-color: red;
+  }
+  100% {
+    background-color: none;
+  }
+}
+
+@keyframes wrongPawnSelected {
+  0% {
+    background-color: none;
+  }
+  30% {
+    background-color: red;
+  }
+  100% {
+    background-color: none;
+  }
+}
+
+@-webkit-keyframes pawnTaked {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pawnTaked {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .winPage {

@@ -1,17 +1,7 @@
-.playerColors{
-    @include flexCenter;
-    justify-content: space-around;
-    height: 10vh;
-    p {
-        font-size: 1.5rem;
-        padding: 1rem;
-    }
-}
-
 .playerTurnTitle{
     @include flexCenter;
     height: 10vh;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     p {
         margin: 0 0.5rem;
         font-size: 2rem;
@@ -42,10 +32,32 @@
             margin: 3%;
             padding: 2%;
             @include setHeightAndWidth(62%);
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
         }
         .selectedPawn{
             background-color: $primaryColor;
-            border-radius: 50%;
         }
+    }
+}
+
+@keyframes wrongPawnSelected{
+    0%{
+        background-color: none;
+    }
+    30%{
+        background-color: red;
+    }
+    100%{
+        background-color: none;
+    }
+}
+
+@keyframes pawnTaked{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
     }
 }

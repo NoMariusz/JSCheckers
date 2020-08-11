@@ -29,6 +29,8 @@ export class Pawn{
             this.field.board.unselectAllPawns();
             this.setPawnActive();
             this.field.board.preparePawnMove(this);
+        } else {
+            this.playWrongPawnAnimation();
         }
     }
 
@@ -56,11 +58,14 @@ export class Pawn{
     }
 
     takeThisPawn(){
-        this.field.removePawn();
-        this.field.board.removePawnFromBoardPawnList(this);
-        this.field = null;
-        console.log(`${this} deleting self`);
-        delete this;
+        this.node.style.animation = 'pawnTaked 0.5s ease';
+        this.field.board.removePawnFromBoardPawnList(this); //outside timeout, because, after this function is made checking win with this.field.board array
+        window.setTimeout(() => {
+            this.field.removePawn();
+            this.field = null;
+            console.log(`${this} deleting self`);
+            delete this;
+        }, 500);
     }
 
     checkCanBeQueen(){
@@ -73,5 +78,12 @@ export class Pawn{
     makeQueen(){
         this.queen = true;
         this.node.setAttribute("src", `assets/${this.color}QueenPawn.png`);
+    }
+
+    playWrongPawnAnimation(){
+        this.node.style.animation = 'wrongPawnSelected 1s ease';
+        window.setTimeout(() => {
+            this.node.style.animation = '';
+        }, 1000);
     }
 }
