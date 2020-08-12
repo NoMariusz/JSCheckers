@@ -169,6 +169,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 
 .winPage .winInfo {
@@ -204,6 +205,12 @@
 .winPage button:hover {
   color: #1B4D70;
   background-color: #eee;
+}
+
+.winPage .confetti {
+  position: absolute;
+  -webkit-transition: top 1s linear, left 1s linear;
+  transition: top 1s linear, left 1s linear;
 }
 
 * {

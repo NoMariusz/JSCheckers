@@ -2,6 +2,7 @@
     height: 100vh;
     @include flexCenter;
     flex-direction: column;
+    position: relative;
     .winInfo{
         @include flexCenter;
         p {
@@ -11,5 +12,9 @@
     }
     button {
         @include baseButtonFormat;
+    }
+    .confetti{
+        position: absolute;
+        transition: top 1s linear, left 1s linear;
     }
 }

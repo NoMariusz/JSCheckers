@@ -1,4 +1,4 @@
-import {letters } from './vars.js';
+import { letters } from './vars.js';
 
 export class Field{
     constructor(color, codeLetterIndex, codeNumber, board){

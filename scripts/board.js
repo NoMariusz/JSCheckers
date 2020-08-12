@@ -1,6 +1,6 @@
 import { Field } from "./field.js";
 import { Pawn } from "./pawn.js";
-import {letters } from './vars.js';
+import { ConfettiManager } from './confetti.js';
 
 export class Board{
     constructor(){
@@ -244,7 +244,11 @@ export class Board{
         winColorName.textContent = color.toUpperCase();
         gameBlock.classList.add("hidden");
         winBlock.classList.remove("hidden");
+
         let sunnyFanfarSound = document.getElementById('sunnyFanfarSound');
         sunnyFanfarSound.play();
+
+        let confettiManager = new ConfettiManager(winBlock);
+        confettiManager.start();
     }
 }
